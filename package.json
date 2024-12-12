@@ -1,0 +1,21 @@
+{
+  "name": "codecafebackend",
+  "version": "1.0.0",
+  "description": "backend for codeCafe web",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "backend"
+  ],
+  "author": "akriti",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.8.4"
+  }
+}
