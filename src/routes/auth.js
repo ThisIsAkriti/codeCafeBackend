@@ -26,25 +26,24 @@ authRouter.post("/signup" , async(req, res) => {
 }) 
 
 authRouter.post("/login" , async(req,res) => {
-        try{
-            const {emailId , password} = req.body;
+    try{
+        const {emailId , password} = req.body;
         const user = await User.findOne({emailId: emailId});
         if(!user){
-            return res.status(400).json({message: "Invalid Credentials email!"});
+            return res.status(400).json({message: "Invalid Credentials!"});
         }
 
         const isPasswordValid = await bcrypt.compare(password , user.password);
         if(isPasswordValid){ 
             const token = jwt.sign({_id: user._id} , "CODE@CAFE2025" , {expiresIn:'1h'});
-            res.cookie("token" , "asldjfnwoierfsdfASDFdfsdfgrgtfjklkfgbvrtgghj");
 
             res.cookie("token" , token);
-            return res.send(user)
+            return res.json(user);
         }else{
-            return res.send("Invalid Credentials!")
+            return res.status(400).json({ message: "Invalid Credentials!" });
         }
     }catch(err){
-        return res.status(400).send("Invalid Credentials!") 
+        return res.status(500).json({ message: "Server Error" });
     }
 })
 authRouter.post("/logout" , async(req, res) => {

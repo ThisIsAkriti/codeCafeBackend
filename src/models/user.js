@@ -8,11 +8,13 @@ const userSchema = new mongoose.Schema(
         required:true,
         minLength:2,
         maxLength:20,
+        trim:true
     },
     lastName:{
         type:String,
         minLength:2,
         maxLength:20,
+        trim:true
     },
     emailId:{
         type:String,
@@ -29,7 +31,7 @@ const userSchema = new mongoose.Schema(
     password:{
         type:String,
         required:true,
-        trim: true,
+        trim:true,
         validate(value){
             if(!validator.isStrongPassword(value)){
                 throw new Error("Password is not Strong" + value);
