@@ -3,7 +3,7 @@ const { userAuth } = require("../middlewares/auth");
 const ConnectionRequest = require("../models/connectionRequest");
 const userRouter = express.Router();
 const User = require("../models/user");
-const USER_SAVE_DATA = "firstName  lastName  age photoURL  about skills";
+const USER_SAVE_DATA = "firstName lastName gender age photoUrl about skills";
 
 userRouter.get("/user/request/received" , userAuth , async(req , res) => {
     try{
@@ -78,7 +78,7 @@ userRouter.get("/user/feed" , userAuth , async(req ,res) => {
         });
 
     }catch(err){
-        res.status(404).send("Error : " + err.message);
+        res.status(404).json("Error : " + err.message);
     }
 })
 

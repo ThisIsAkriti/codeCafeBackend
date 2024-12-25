@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 
 authRouter.post("/signup" , async(req, res) => {
     try{
+
         validateSignUpData(req);
         const {firstName , lastName , emailId , password} = req.body;
         const passwordHash = await bcrypt.hash(password , 10)
@@ -18,8 +19,14 @@ authRouter.post("/signup" , async(req, res) => {
             emailId,
             password: passwordHash
         });
-        await user.save();
-        res.send("User added successfully!");
+
+        const savedUser = await user.save();
+
+        const token = jwt.sign({_id: user._id} , "CODE@CAFE2025" , {expiresIn:'1h'});
+
+        res.cookie("token" , token);
+        res.json({message : "User added successfully!" , data : savedUser});
+
     }catch(err){
         res.status(400).send("Error in Signing Up: " + err.message);
     }
