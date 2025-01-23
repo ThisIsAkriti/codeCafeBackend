@@ -35,7 +35,9 @@ authRouter.post("/signup" , async(req, res) => {
 authRouter.post("/login" , async(req,res) => {
     try{
         const {emailId , password} = req.body;
+        console.log("attempting login")
         const user = await User.findOne({emailId: emailId});
+        console.log("loged in user"+ user);
         if(!user){
             return res.status(400).json({message: "Invalid Credentials!"});
         }
@@ -50,7 +52,7 @@ authRouter.post("/login" , async(req,res) => {
             return res.status(400).json({ message: "Invalid Credentials!" });
         }
     }catch(err){
-        return res.status(500).json({ message: "Server Error" });
+        return res.status(500).json({ message: "Server Error" + err.message });
     }
 })
 authRouter.post("/logout" , async(req, res) => {
