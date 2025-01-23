@@ -92,7 +92,7 @@ userSchema.methods.hashPassword = async function(password){
 
 userSchema.methods.getJWT = async function (){
     const user = this;
-    const token = await jwt.sign({_id:user._id} , process.env.TOKEN_SECRET_PASSWORD , {expiresIn:"7d"});
+    const token = await jwt.sign({_id:user._id} , process.env.TOKEN_SECRET_PASSWORD|| "NewCODE@CAFE2025" , {expiresIn:"7d"});
 
     return token;
 }

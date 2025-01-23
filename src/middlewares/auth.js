@@ -6,7 +6,7 @@ const userAuth = async(req , res , next) => {
         if(!token){
             return res.status(401).send("Please Login!")
         }
-        const decodeObj = jwt.verify(token , process.env.TOKEN_SECRET_PASSWORD)
+        const decodeObj = jwt.verify(token , process.env.TOKEN_SECRET_PASSWORD || "NewCODE@CAFE2025")
         const {_id} = decodeObj;
         const user = await User.findById(_id);
 
