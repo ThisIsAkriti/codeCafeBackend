@@ -2,7 +2,7 @@
   "name": "codecafebackend",
   "version": "1.0.0",
   "description": "backend for codeCafe web",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
