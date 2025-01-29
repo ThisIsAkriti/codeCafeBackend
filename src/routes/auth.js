@@ -22,7 +22,7 @@ authRouter.post("/signup" , async(req, res) => {
 
         const savedUser = await user.save();
 
-        const token = jwt.sign({_id: user._id} , process.env.TOKEN_SECRET_PASSWORD || "NewCODE@CAFE2025" , {expiresIn:'1h'});
+        const token = jwt.sign({_id: user._id} , process.env.TOKEN_SECRET_PASSWORD , {expiresIn:'1h'});
 
         res.cookie("token" , token);
         res.json({message : "User added successfully!" , data : savedUser});
@@ -35,16 +35,16 @@ authRouter.post("/signup" , async(req, res) => {
 authRouter.post("/login" , async(req,res) => {
     try{
         const {emailId , password} = req.body;
-        console.log("attempting login")
+        
         const user = await User.findOne({emailId: emailId});
-        console.log("loged in user"+ user);
+        
         if(!user){
             return res.status(400).json({message: "Invalid Credentials!"});
         }
 
         const isPasswordValid = await bcrypt.compare(password , user.password);
         if(isPasswordValid){ 
-            const token = jwt.sign({_id: user._id} , process.env.TOKEN_SECRET_PASSWORD || "NewCODE@CAFE2025" , {expiresIn:'1h'});
+            const token = jwt.sign({_id: user._id} , process.env.TOKEN_SECRET_PASSWORD , {expiresIn:'1h'});
 
             res.cookie("token" , token);
             return res.json(user);
