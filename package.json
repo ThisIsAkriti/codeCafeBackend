@@ -23,6 +23,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
+    "node-cron": "^3.0.3",
     "validator": "^13.12.0"
   }
 }

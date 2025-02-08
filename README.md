@@ -36,4 +36,7 @@
       sudo systemctl restart nginx
    - modify baseurl to /api in frontend.
 
+### Tiny task Scheduler
+   - node Cron (install it and use it);
+   - crontab (editor for cron schedule expressions);
     Happy Coding💙
